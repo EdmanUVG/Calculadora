@@ -1,12 +1,12 @@
 
 public interface CalculadoraInterface {
 	
-	public void sumar();
+	public int sumar(int paramA, int paramB);
 	
-	public void restar();
+	public int restar(int paramA, int paramB);
 	
-	public void multiplicar();
+	public int multiplicar(int paramA, int paramB);
 	
-	public void dividir();
+	public int dividir(int paramA, int paramB);
 
 }
