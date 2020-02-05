@@ -1,6 +1,7 @@
 
 public interface CalculadoraInterface {
 	
+	
 	public int sumar(int paramA, int paramB);
 	
 	public int restar(int paramA, int paramB);

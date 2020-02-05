@@ -1,31 +1,46 @@
+import calculadora.CalculadoraInterface;
 
 public class CalculadoraImplementacion implements CalculadoraInterface {
 	
-	int operandoA = 0;
-	int operandoB = 0;
-	
+	/**
+	 * Ingresan dos parámetros enteros, suma los parámetros
+	 *  y retorna su resultado
+	 */
 	@Override
 	public int sumar(int paramA, int paramB) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result = paramA + paramB;
+		return result;
 	}
-
+	/**
+	 * Ingresa dos parámetros enteros, resta los parámetros
+	 * y retorna su resultado
+	 */
 	@Override
 	public int restar(int paramA, int paramB) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = paramA - paramB;
+		return result;
 	}
 
+	/**
+	 * Ingresa dos parámetros enteros, multiplica los parámetros
+	 * y retorna su resultado
+	 */
 	@Override
 	public int multiplicar(int paramA, int paramB) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result = paramA * paramB;
+		return result;
 	}
-
+	/**
+	 * Ingresa dos parámetros enteros, divide los parámetros
+	 * y retorna su resultado
+	 */
 	@Override
 	public int dividir(int paramA, int paramB) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result = paramA / paramB;
+		return result;
 	}
 
 	
