@@ -105,7 +105,7 @@ public class Calculadora {
 				}
 			}
 			// Al final de correr en cada elemento se despliega el resultado de las operaciones
-			System.out.println("Resultado: " + miStack.pop());
+			System.out.println(String.format("%-20s", expresion) + " = "  + miStack.pop());
 		}
 		in.close(); // Cierra el BufferReader cuando finalizamos en buscar todos los datos
 
