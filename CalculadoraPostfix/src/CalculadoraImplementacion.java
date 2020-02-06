@@ -15,8 +15,10 @@ public class CalculadoraImplementacion implements CalculadoraInterface {
 	 */
 	@Override
 	public int sumar(int operandoA, int operandoB) {
-		//pre:
-		//pos:  Retorna el resultado de la suma
+		/**
+		*pre:
+		*pos:  Retorna el resultado de la suma
+		*/
 
 		// Realiza la operacion de sumar
 		return operandoA + operandoB;
@@ -29,8 +31,10 @@ public class CalculadoraImplementacion implements CalculadoraInterface {
 	 */
 	@Override
 	public int restar(int operandoA, int operandoB) {
-		//pre:
-		//pos:  Retorna el resultado de la resta
+		/**
+		*pre:
+		*pos:  Retorna el resultado de la resta
+		*/
 
 		// Realiza la operacion de restar
 		return operandoA - operandoB;
@@ -43,8 +47,10 @@ public class CalculadoraImplementacion implements CalculadoraInterface {
 	 */
 	@Override
 	public int multiplicar(int operandoA, int operandoB) {
-		//pre:
-		//pos:  Retorna el resultado de la multiplicacion
+		/**
+		*pre:
+		*pos:  Retorna el resultado de la multiplicacion
+		*/
 
 		// Realiza la operacion de multiplicar
 		return operandoA * operandoB;
@@ -57,8 +63,10 @@ public class CalculadoraImplementacion implements CalculadoraInterface {
 	 */
 	@Override
 	public int dividir(int operandoA, int operandoB) {
-		//pre: Verifica que la division no contenga un numero 0
-		//pos: Retorna el resultado de la division
+		/**
+		*pre: Verifica que la division no contenga un numero 0
+		*pos: Retorna el resultado de la division
+		*/
 
 		// Retorna cero si alguno de los operandos es cero
 		if(operandoA == 0 || operandoB == 0) {
