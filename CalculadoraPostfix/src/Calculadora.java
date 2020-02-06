@@ -32,7 +32,7 @@ public class Calculadora {
 		
 		
 		// Busca y carga el archivo datos.txt donde se guardan los datos.
-		BufferedReader in = new BufferedReader(new FileReader("src/calculadora/datos.txt"));
+		BufferedReader in = new BufferedReader(new FileReader("src/datos.txt"));
 		
 		// Corre mientras hay datos para leer
 		while((expresion = in.readLine()) != null)
