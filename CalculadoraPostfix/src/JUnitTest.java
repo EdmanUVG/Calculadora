@@ -4,13 +4,11 @@ import org.junit.Test;
 
 public class JUnitTest {
 
-	CalculadoraImplementacion implementacion = new CalculadoraImplementacion();
-	StackArrayList miStack = new StackArrayList();
+	Calculadora implementacion = new Calculadora();
+	Stack miStack = new Stack();
 	
-	/**
-	*Test de la calculadora
-	*@Test
-	*/
+	// Test de la calculadora
+	@Test
 	public void testSuma() {
 	
 		int actual = implementacion.sumar(2, 3);
@@ -19,9 +17,7 @@ public class JUnitTest {
 		assertEquals(expected, actual);
 	}
 	
-	/**
-	*@Test
-	*/
+	@Test
 	public void testResta() {
 	
 		int actual = implementacion.restar(7, 3);
@@ -30,9 +26,7 @@ public class JUnitTest {
 		assertEquals(expected, actual);
 	}
 	
-	/**
-	*@Test
-	*/
+	@Test
 	public void testMultiplicar() {
 	
 		int actual = implementacion.multiplicar(3, 3);
@@ -41,9 +35,7 @@ public class JUnitTest {
 		assertEquals(expected, actual);
 	}
 	
-	/**
-	*@Test
-	*/
+	@Test
 	public void testDividir() {
 	
 		int actual = implementacion.dividir(0, 4);
@@ -54,9 +46,7 @@ public class JUnitTest {
 	
 	// Test de la pila
 	
-	/**
-	*@Test
-	*/
+	@Test
 	public void testEmpty() {
 		
 		boolean actual = miStack.empty();
@@ -65,9 +55,7 @@ public class JUnitTest {
 		assertEquals(expected, actual);
 	}
 	
-	/**
-	*@Test
-	*/
+	@Test
 	public void testSize() {
 		
 		int actual = miStack.size();
