@@ -14,8 +14,10 @@ public interface CalculadoraInterface {
 	 * @return
 	 */
 
-	//pre:
-	//pos:  Retorna el resultado de la suma
+	/**
+	*pre:
+	*pos:  Retorna el resultado de la suma
+	*/
 	public int sumar(int operandoA, int operandoB);
 
 
@@ -25,8 +27,10 @@ public interface CalculadoraInterface {
 	 * @return
 	 */
 
-	//pre:
-	//pos:  Retorna el resultado de la resta
+	/**
+	*pre:
+	*pos:  Retorna el resultado de la resta
+	*/
 	public int restar(int operandoA, int operandoB);
 
 
@@ -36,8 +40,10 @@ public interface CalculadoraInterface {
 	 * @return
 	 */
 
-	//pre:
-	//pos:  Retorna el resultado de la multiplicacion
+	/**
+	*pre:
+	*pos:  Retorna el resultado de la multiplicacion
+	*/
 	public int multiplicar(int operandoA, int operandoB);
 
 
@@ -47,8 +53,10 @@ public interface CalculadoraInterface {
 	 * @return
 	 */
 
-	//pre: Verifica que la division no contenga un numero 0
-	//pos: Retorna el resultado de la division
+	/**
+	*pre: Verifica que la division no contenga un numero 0
+	*pos: Retorna el resultado de la division
+	*/
 	public int dividir(int operandoA, int operandoB);
 
 }
