@@ -7,76 +7,48 @@
  * 
  */
 public class CalculadoraImplementacion implements CalculadoraInterface {
-
-
+	
 	/**
-	 * @param operandoA
-	 * @param operandoB
+	 * Ingresan dos parámetros enteros, suma los parámetros
+	 *  y retorna su resultado
 	 */
 	@Override
-	public int sumar(int operandoA, int operandoB) {
-		/**
-		*pre:
-		*pos:  Retorna el resultado de la suma
-		*/
-
-		// Realiza la operacion de sumar
-		return operandoA + operandoB;
+	public int sumar(int paramA, int paramB) {
+		// TODO Auto-generated method stub
+		int result = paramA + paramB;
+		return result;
 	}
-
-
 	/**
-	 * @param operandoA
-	 * @param operandoB
+	 * Ingresa dos parámetros enteros, resta los parámetros
+	 * y retorna su resultado
 	 */
 	@Override
-	public int restar(int operandoA, int operandoB) {
-		/**
-		*pre:
-		*pos:  Retorna el resultado de la resta
-		*/
-
-		// Realiza la operacion de restar
-		return operandoA - operandoB;
+	public int restar(int paramA, int paramB) {
+		int result = paramA - paramB;
+		return result;
 	}
-
 
 	/**
-	 * @param operandoA
-	 * @param operandoB
+	 * Ingresa dos parámetros enteros, multiplica los parámetros
+	 * y retorna su resultado
 	 */
 	@Override
-	public int multiplicar(int operandoA, int operandoB) {
-		/**
-		*pre:
-		*pos:  Retorna el resultado de la multiplicacion
-		*/
-
-		// Realiza la operacion de multiplicar
-		return operandoA * operandoB;
+	public int multiplicar(int paramA, int paramB) {
+		// TODO Auto-generated method stub
+		int result = paramA * paramB;
+		return result;
 	}
-
-
 	/**
-	 * @param operandoA
-	 * @param operandoB
+	 * Ingresa dos parámetros enteros, divide los parámetros
+	 * y retorna su resultado
 	 */
 	@Override
-	public int dividir(int operandoA, int operandoB) {
-		/**
-		*pre: Verifica que la division no contenga un numero 0
-		*pos: Retorna el resultado de la division
-		*/
-
-		// Retorna cero si alguno de los operandos es cero
-		if(operandoA == 0 || operandoB == 0) {
-			return 0;
-		}
-
-		// Realiza la operacion de dividir
-		return operandoA / operandoB;
+	public int dividir(int paramA, int paramB) {
+		// TODO Auto-generated method stub
+		int result = paramA / paramB;
+		return result;
 	}
 
-
+	
 
 }
