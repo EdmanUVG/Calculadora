@@ -7,8 +7,7 @@
 
 import java.util.ArrayList;
 
-public class Stack<E>
-implements iStack<E>
+public class Stack<E> implements iStack<E>
 {
 	protected ArrayList<E> data;
 
@@ -51,3 +50,5 @@ implements iStack<E>
 		return size() == 0;
 	}
 }
+
+//clase abst del stack y lita

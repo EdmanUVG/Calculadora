@@ -18,9 +18,10 @@ public class Main {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
+		
 
 		// Stack generico. Acepta cualquier tipo de dato
-		iStack<Integer> miStack = new Stack<Integer>();
+		iStack<Integer> miStack = new StackVector<Integer>();
 
 		// Implementa los metods de nuestra interfaz de calculadora
 		Calculadora implementacion = new Calculadora();
