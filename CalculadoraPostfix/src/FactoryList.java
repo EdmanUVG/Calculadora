@@ -1,7 +1,7 @@
 
-public class FactoryList {
+public class FactoryList<E> {
 	
-	public iList getList(String implementacion) {
+	public AbstractList<E> getList(String implementacion) {
 		
 		if(implementacion == null) {
 			return null;

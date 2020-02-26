@@ -29,8 +29,9 @@ public class Main {
 	private JButton btnCircular;
 	private JLabel lblSeleccionarLista;
 	private JLabel test;
-	
+
 	FactoryStack factory;
+	FactoryList factoryList;
 	Calculadora calculos;
 
 	/**
@@ -60,8 +61,9 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() throws IOException {
-		
+
 		factory = new FactoryStack();
+		factoryList = new FactoryList();
 
 		// Implementa los metods de nuestra interfaz de iCalculadora
 		calculos = new Calculadora();
@@ -88,7 +90,7 @@ public class Main {
 		lblSeleccionarImplementacionDel.setBounds(0, 130, 855, 23);
 		panel.add(lblSeleccionarImplementacionDel);
 
-		
+
 
 		btnArraylist = new JButton("ArrayList");
 		btnArraylist.setForeground(new Color(255, 255, 255));
@@ -99,7 +101,7 @@ public class Main {
 				// Metodo para hacer los calculos
 				// y hace llamada al Factory class
 				calcular("ArrayList");
-				
+
 				test.setText("ArrayList implementado");
 
 			}
@@ -122,7 +124,7 @@ public class Main {
 				// Metodo para hacer los calculos
 				// y hace llamada al Factory class
 				calcular("List");
-				
+
 				test.setText("List implementado");
 			}
 		});
@@ -135,11 +137,11 @@ public class Main {
 		btnVector.setBackground(new Color(0, 153, 204));
 		btnVector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// Metodo para hacer los calculos
 				// y hace llamada al Factory class
 				calcular("Vector");
-				
+
 				test.setText("Vector implementado");
 			}
 		});
@@ -149,7 +151,13 @@ public class Main {
 		panel.add(btnVector);
 
 		btnSimplemente = new JButton("Simplemente encadenada");
-		btnSimplemente.setVisible(false);
+		btnSimplemente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				implementacionList("Simplemente");
+				test.setText("Simplemente Enlazado implementado");
+			}
+		});
+		btnSimplemente.setVisible(true);
 		btnSimplemente.setForeground(Color.WHITE);
 		btnSimplemente.setFont(new Font("Arial", Font.BOLD, 13));
 		btnSimplemente.setBorder(null);
@@ -188,15 +196,122 @@ public class Main {
 		panel.add(test);
 
 	}
-	
+
+	public void implementacionList(String implementation) {
+		// Llama a la clase Factory y pasa parametro
+		// en base a la implementacion requerida
+		AbstractList<Integer> implementacion = factoryList.getList(implementation);
+
+		// Se guarda los resultdos de las operaciones
+		int result = 0;
+
+		// Busca y carga el archivo datos.txt donde se guardan los datos.
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new FileReader("CalculadoraPostfix/src/datos.txt"));
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		// Variable para guardar uno a uno los datos sacados del txt
+		String expresion;
+
+		// Corre mientras hay datos para leer
+		try {
+			while ((expresion = in.readLine()) != null) {
+				// Se divide la cadena en arreglos para mas facil la busqueda letra por letra
+				String[] opercionArray = expresion.split("");
+
+				// Recorre todos los elementos de del arreglo
+				for (int i = 0; i < opercionArray.length; i++) {
+
+					// Si el elemento es un signo + entonces es una suma
+					if (opercionArray[i].equals("+")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.sumar(implementacion.getLast(), implementacion.getLast());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.add(result);
+
+						// Si el elemento es un signo - entonces es una resta
+					} else if (opercionArray[i].equalsIgnoreCase("-")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.restar(implementacion.getLast(), implementacion.getLast());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.add(result);
+
+						// Si el elemento es un signo * entonces es una multiplicacion
+					} else if (opercionArray[i].equalsIgnoreCase("*")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.multiplicar(implementacion.getLast(), implementacion.getLast());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.add(result);
+
+						// Si el elemento es un signo / entonces es una division
+					} else if (opercionArray[i].equalsIgnoreCase("/")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.dividir(implementacion.getLast(), implementacion.getLast());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.add(result);
+
+						// Si el elemento es un numero, entonces se agrega al stack
+					} else {
+						try {
+
+							// Se convierte el String a enteros
+							Integer num = Integer.parseInt(opercionArray[i]);
+
+							// Se agrega el entero al stack
+							implementacion.add(num);
+
+						} catch (Exception e1) {
+							// System.out.println("Operando....");
+						}
+
+					}
+				}
+				// Al final de correr en cada elemento se despliega el resultado de las
+				// operaciones
+
+				System.out.println(String.format("%-20s", expresion) + " = " + implementacion.getLast());
+			}
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		try {
+			in.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} // Cierra el BufferReader cuando finalizamos en buscar todos los datos
+
+	}
+
 	// Metodo para hacer los calculos
 	// y hace llamada al Factory class
 	public void calcular(String implementation) {
-		
+
 		// Llama a la clase Factory y pasa parametro
 		// en base a la implementacion requerida
 		AbstractStack<Integer> implementacion = factory.getStack(implementation);
-		
+
 		// Se guarda los resultdos de las operaciones
 		int result = 0;
 

@@ -12,33 +12,33 @@ public class StackList<E> extends AbstractStack<E> {
 	}
 
 	@Override
-	public void push(Object item) {
+	public void push(E item) {
 		// TODO Auto-generated method stub
-		
+		data.add(item);
 	}
 
 	@Override
 	public E pop() {
 		// TODO Auto-generated method stub
-		return null;
+		return data.remove(size()-1);
 	}
 
 	@Override
 	public E peek() {
 		// TODO Auto-generated method stub
-		return null;
+		return data.get(size() - 1);
 	}
 
 	@Override
 	public boolean empty() {
 		// TODO Auto-generated method stub
-		return false;
+		return data.isEmpty();
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		// post: returns the number of elements in the stack
+		return data.size();
 	}
 
 }

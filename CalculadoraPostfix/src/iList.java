@@ -1,23 +1,30 @@
 
-public interface iList<E> {
+public interface iList<E>  {
 	
 	
-	public void push(E item);
+	public void add(E item);
 	// pre: 
-	// post: item is added to stack
-	// will be popped next if no intervening push
+	// post: value is added to tail of list
+	
+	public E getFirst();
+	// pre: list is not empty
+	// post: returns first value in list
 
-	public E pop();
-	// pre: stack is not empty
-	// post: most recently pushed item is removed and returned
+	public E getLast();
+	// pre: list is not empty
+	// post: returns last value in list
+	
+	public E removeFirst();
+	// pre: list is not empty
+	// post: removes first value from list
+	
+	public E removeLast();
+	// pre: list is not empty
+	// post: removes last value from list
 
-	public E peek();
-	// pre: stack is not empty
-	// post: top value (next to be popped) is returned
-
-	public boolean empty();
-	// post: returns true if and only if the stack is empty
+	public boolean isEmpty();
+	// post: returns true iff list has no elements
 
 	public int size();
-	// post: returns the number of elements in the stack
+	// post: returns number of elements in list
 }
