@@ -23,7 +23,7 @@ public class Main2 {
 		// Stack generico. Acepta cualquier tipo de dato
 		iStack<Integer> miStack = new StackVector<Integer>();
 
-		// Implementa los metods de nuestra interfaz de calculadora
+		// Implementa los metods de nuestra interfaz de iCalculadora
 		Calculadora implementacion = new Calculadora();
 
 		// Se guarda los resultdos de las operaciones

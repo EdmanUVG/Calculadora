@@ -1,20 +1,22 @@
 
-public class FactoryStack {
+public class FactoryStack<E> {
 	
-	public iStack getStack(String implementacion) {
+	public AbstractStack<E> getStack(String implementacion) {
+		
 		if(implementacion == null) {
-			return new ImplementacionVacia();
+			return null;
 		}
 		if(implementacion.equalsIgnoreCase("ArrayList")) {
-			return new Stack();
+			return new StackArrayList();
 		}
 		if(implementacion.equalsIgnoreCase("Vector")) {
 			return new StackVector();
 		}
 		if(implementacion.equalsIgnoreCase("List")) {
-			return null;
+			return new StackList();
 		}
-		return new ImplementacionVacia();
+		
+		return null;
 	}
 
 }

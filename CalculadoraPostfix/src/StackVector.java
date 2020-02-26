@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+
 import java.util.Vector;
 
-public class StackVector<E> extends AbstrackStack<E> {
+public class StackVector<E> extends AbstractStack<E> {
 	
 	protected Vector<E> data;
 	
