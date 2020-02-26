@@ -29,6 +29,9 @@ public class Main {
 	private JButton btnCircular;
 	private JLabel lblSeleccionarLista;
 	private JLabel test;
+	
+	FactoryStack factory;
+	Calculadora calculos;
 
 	/**
 	 * Launch the application.
@@ -57,6 +60,11 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() throws IOException {
+		
+		factory = new FactoryStack();
+
+		// Implementa los metods de nuestra interfaz de iCalculadora
+		calculos = new Calculadora();
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 871, 544);
@@ -74,16 +82,13 @@ public class Main {
 		lblCalculadoraPostfix.setBounds(0, 60, 855, 23);
 		panel.add(lblCalculadoraPostfix);
 
-		JLabel lblSeleccionarImplementacionDel = new JLabel("Seleccionar implementacion del Stack");
+		JLabel lblSeleccionarImplementacionDel = new JLabel("Seleccionar calculos del Stack");
 		lblSeleccionarImplementacionDel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccionarImplementacionDel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblSeleccionarImplementacionDel.setBounds(0, 130, 855, 23);
 		panel.add(lblSeleccionarImplementacionDel);
 
-		FactoryStack factory = new FactoryStack();
-
-		// Implementa los metods de nuestra interfaz de iCalculadora
-		Calculadora implementacion = new Calculadora();
+		
 
 		btnArraylist = new JButton("ArrayList");
 		btnArraylist.setForeground(new Color(255, 255, 255));
@@ -91,107 +96,11 @@ public class Main {
 		btnArraylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				AbstractStack<Integer> arrayList = factory.getStack("ArrayList");
-
-				// Se guarda los resultdos de las operaciones
-				int result = 0;
-
-				// Busca y carga el archivo datos.txt donde se guardan los datos.
-				BufferedReader in = null;
-				try {
-					in = new BufferedReader(new FileReader("CalculadoraPostfix/src/datos.txt"));
-				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-
-				// Variable para guardar uno a uno los datos sacados del txt
-				String expresion;
-
-				// Corre mientras hay datos para leer
-				try {
-					while ((expresion = in.readLine()) != null) {
-						// Se divide la cadena en arreglos para mas facil la busqueda letra por letra
-						String[] opercionArray = expresion.split("");
-
-						// Recorre todos los elementos de del arreglo
-						for (int i = 0; i < opercionArray.length; i++) {
-
-							// Si el elemento es un signo + entonces es una suma
-							if (opercionArray[i].equals("+")) {
-
-								// Retorna el resultado de la operacion y lo guarda
-								// @param1 = miStack.pop()
-								// @param2 = miStack.pop()
-								result = implementacion.sumar(arrayList.pop(), arrayList.pop());
-
-								// Se agrega el resultado a la ultima posicion del stack
-								arrayList.push(result);
-
-								// Si el elemento es un signo - entonces es una resta
-							} else if (opercionArray[i].equalsIgnoreCase("-")) {
-
-								// Retorna el resultado de la operacion y lo guarda
-								// @param1 = miStack.pop()
-								// @param2 = miStack.pop()
-								result = implementacion.restar(arrayList.pop(), arrayList.pop());
-
-								// Se agrega el resultado a la ultima posicion del stack
-								arrayList.push(result);
-
-								// Si el elemento es un signo * entonces es una multiplicacion
-							} else if (opercionArray[i].equalsIgnoreCase("*")) {
-
-								// Retorna el resultado de la operacion y lo guarda
-								// @param1 = miStack.pop()
-								// @param2 = miStack.pop()
-								result = implementacion.multiplicar(arrayList.pop(), arrayList.pop());
-
-								// Se agrega el resultado a la ultima posicion del stack
-								arrayList.push(result);
-
-								// Si el elemento es un signo / entonces es una division
-							} else if (opercionArray[i].equalsIgnoreCase("/")) {
-
-								// Retorna el resultado de la operacion y lo guarda
-								// @param1 = miStack.pop()
-								// @param2 = miStack.pop()
-								result = implementacion.dividir(arrayList.pop(), arrayList.pop());
-
-								// Se agrega el resultado a la ultima posicion del stack
-								arrayList.push(result);
-
-								// Si el elemento es un numero, entonces se agrega al stack
-							} else {
-								try {
-
-									// Se convierte el String a enteros
-									Integer num = Integer.parseInt(opercionArray[i]);
-
-									// Se agrega el entero al stack
-									arrayList.push(num);
-
-								} catch (Exception e1) {
-									// System.out.println("Operando....");
-								}
-
-							}
-						}
-						// Al final de correr en cada elemento se despliega el resultado de las
-						// operaciones
-
-						System.out.println(String.format("%-20s", expresion) + " = " + arrayList.pop());
-					}
-				} catch (IOException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				try {
-					in.close();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} // Cierra el BufferReader cuando finalizamos en buscar todos los datos
+				// Metodo para hacer los calculos
+				// y hace llamada al Factory class
+				calcular("ArrayList");
+				
+				test.setText("ArrayList implementado");
 
 			}
 		});
@@ -210,9 +119,11 @@ public class Main {
 				btnDoblemente.setVisible(true);
 				btnCircular.setVisible(true);
 
-				iStack implementacionVector = factory.getStack("Vector");
-
-				test.setText("List");
+				// Metodo para hacer los calculos
+				// y hace llamada al Factory class
+				calcular("List");
+				
+				test.setText("List implementado");
 			}
 		});
 		btnList.setFont(new Font("Arial", Font.BOLD, 13));
@@ -224,7 +135,12 @@ public class Main {
 		btnVector.setBackground(new Color(0, 153, 204));
 		btnVector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				test.setText("Vector");
+				
+				// Metodo para hacer los calculos
+				// y hace llamada al Factory class
+				calcular("Vector");
+				
+				test.setText("Vector implementado");
 			}
 		});
 		btnVector.setBorder(null);
@@ -259,7 +175,7 @@ public class Main {
 		btnCircular.setBounds(336, 372, 201, 30);
 		panel.add(btnCircular);
 
-		lblSeleccionarLista = new JLabel("Seleccionar implementacion de la Lista");
+		lblSeleccionarLista = new JLabel("Seleccionar calculos de la Lista");
 		lblSeleccionarLista.setVisible(false);
 		lblSeleccionarLista.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccionarLista.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -267,8 +183,118 @@ public class Main {
 		panel.add(lblSeleccionarLista);
 
 		test = new JLabel("");
-		test.setBounds(365, 424, 131, 35);
+		test.setHorizontalAlignment(SwingConstants.CENTER);
+		test.setBounds(0, 424, 855, 35);
 		panel.add(test);
 
+	}
+	
+	// Metodo para hacer los calculos
+	// y hace llamada al Factory class
+	public void calcular(String implementation) {
+		
+		// Llama a la clase Factory y pasa parametro
+		// en base a la implementacion requerida
+		AbstractStack<Integer> implementacion = factory.getStack(implementation);
+		
+		// Se guarda los resultdos de las operaciones
+		int result = 0;
+
+		// Busca y carga el archivo datos.txt donde se guardan los datos.
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new FileReader("CalculadoraPostfix/src/datos.txt"));
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		// Variable para guardar uno a uno los datos sacados del txt
+		String expresion;
+
+		// Corre mientras hay datos para leer
+		try {
+			while ((expresion = in.readLine()) != null) {
+				// Se divide la cadena en arreglos para mas facil la busqueda letra por letra
+				String[] opercionArray = expresion.split("");
+
+				// Recorre todos los elementos de del arreglo
+				for (int i = 0; i < opercionArray.length; i++) {
+
+					// Si el elemento es un signo + entonces es una suma
+					if (opercionArray[i].equals("+")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.sumar(implementacion.pop(), implementacion.pop());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.push(result);
+
+						// Si el elemento es un signo - entonces es una resta
+					} else if (opercionArray[i].equalsIgnoreCase("-")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.restar(implementacion.pop(), implementacion.pop());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.push(result);
+
+						// Si el elemento es un signo * entonces es una multiplicacion
+					} else if (opercionArray[i].equalsIgnoreCase("*")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.multiplicar(implementacion.pop(), implementacion.pop());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.push(result);
+
+						// Si el elemento es un signo / entonces es una division
+					} else if (opercionArray[i].equalsIgnoreCase("/")) {
+
+						// Retorna el resultado de la operacion y lo guarda
+						// @param1 = miStack.pop()
+						// @param2 = miStack.pop()
+						result = calculos.dividir(implementacion.pop(), implementacion.pop());
+
+						// Se agrega el resultado a la ultima posicion del stack
+						implementacion.push(result);
+
+						// Si el elemento es un numero, entonces se agrega al stack
+					} else {
+						try {
+
+							// Se convierte el String a enteros
+							Integer num = Integer.parseInt(opercionArray[i]);
+
+							// Se agrega el entero al stack
+							implementacion.push(num);
+
+						} catch (Exception e1) {
+							// System.out.println("Operando....");
+						}
+
+					}
+				}
+				// Al final de correr en cada elemento se despliega el resultado de las
+				// operaciones
+
+				System.out.println(String.format("%-20s", expresion) + " = " + implementacion.pop());
+			}
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		try {
+			in.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} // Cierra el BufferReader cuando finalizamos en buscar todos los datos
 	}
 }
