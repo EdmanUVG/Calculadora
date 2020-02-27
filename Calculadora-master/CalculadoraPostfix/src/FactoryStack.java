@@ -1,5 +1,6 @@
 
 public class FactoryStack<E> {
+
 	
 	public AbstractStack<E> getStack(String implementacion) {
 		

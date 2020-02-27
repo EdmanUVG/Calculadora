@@ -12,6 +12,7 @@
  * @luis
  * */
 public class Node<E> {
+	
 	 protected E data;
 	 //Referring to the next element
 	   protected Node<E> nextElement;

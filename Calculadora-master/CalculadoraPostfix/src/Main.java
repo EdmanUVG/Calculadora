@@ -22,7 +22,6 @@ public class Main {
 	private JFrame frame;
 	private JButton btnCalcular;
 	private JButton btnArraylist;
-	private JButton btnList;
 	private JButton btnVector;
 	private JButton btnSimplemente;
 	private JButton btnDoblemente;
@@ -100,7 +99,7 @@ public class Main {
 
 				// Metodo para hacer los calculos
 				// y hace llamada al Factory class
-				calcular("ArrayList");
+				implementacionStack("ArrayList");
 
 				test.setText("ArrayList implementado");
 
@@ -110,28 +109,6 @@ public class Main {
 		btnArraylist.setBounds(65, 197, 140, 30);
 		panel.add(btnArraylist);
 
-		btnList = new JButton("List");
-		btnList.setBackground(new Color(0, 153, 204));
-		btnList.setForeground(new Color(255, 255, 255));
-		btnList.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				lblSeleccionarLista.setVisible(true);
-				btnSimplemente.setVisible(true);
-				btnDoblemente.setVisible(true);
-				btnCircular.setVisible(true);
-
-				// Metodo para hacer los calculos
-				// y hace llamada al Factory class
-				calcular("List");
-
-				test.setText("List implementado");
-			}
-		});
-		btnList.setFont(new Font("Arial", Font.BOLD, 13));
-		btnList.setBounds(365, 197, 140, 30);
-		panel.add(btnList);
-
 		btnVector = new JButton("Vector");
 		btnVector.setForeground(new Color(255, 255, 255));
 		btnVector.setBackground(new Color(0, 153, 204));
@@ -140,7 +117,7 @@ public class Main {
 
 				// Metodo para hacer los calculos
 				// y hace llamada al Factory class
-				calcular("Vector");
+				implementacionStack("Vector");
 
 				test.setText("Vector implementado");
 			}
@@ -166,7 +143,12 @@ public class Main {
 		panel.add(btnSimplemente);
 
 		btnDoblemente = new JButton("Doblemente encadenada");
-		btnDoblemente.setVisible(false);
+		btnDoblemente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				implementacionList("Doblemente");
+				test.setText("Doblemente Enlazado implementado");
+			}
+		});
 		btnDoblemente.setForeground(Color.WHITE);
 		btnDoblemente.setFont(new Font("Arial", Font.BOLD, 13));
 		btnDoblemente.setBorder(null);
@@ -175,7 +157,12 @@ public class Main {
 		panel.add(btnDoblemente);
 
 		btnCircular = new JButton("Circular");
-		btnCircular.setVisible(false);
+		btnCircular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				implementacionList("Circular");
+				test.setText("Circular implementado");
+			}
+		});
 		btnCircular.setForeground(Color.WHITE);
 		btnCircular.setFont(new Font("Arial", Font.BOLD, 13));
 		btnCircular.setBorder(null);
@@ -184,7 +171,6 @@ public class Main {
 		panel.add(btnCircular);
 
 		lblSeleccionarLista = new JLabel("Seleccionar calculos de la Lista");
-		lblSeleccionarLista.setVisible(false);
 		lblSeleccionarLista.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccionarLista.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblSeleccionarLista.setBounds(0, 257, 855, 23);
@@ -194,13 +180,20 @@ public class Main {
 		test.setHorizontalAlignment(SwingConstants.CENTER);
 		test.setBounds(0, 424, 855, 35);
 		panel.add(test);
+		
+		JLabel lblLista = new JLabel("Lista");
+		lblLista.setBackground(new Color(0, 153, 204));
+		lblLista.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblLista.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLista.setBounds(378, 196, 100, 30);
+		panel.add(lblLista);
 
 	}
 
 	public void implementacionList(String implementation) {
 		// Llama a la clase Factory y pasa parametro
 		// en base a la implementacion requerida
-		AbstractList<Integer> implementacion = factoryList.getList(implementation);
+		iList<Integer> implementacion = factoryList.getList(implementation);
 
 		// Se guarda los resultdos de las operaciones
 		int result = 0;
@@ -208,7 +201,8 @@ public class Main {
 		// Busca y carga el archivo datos.txt donde se guardan los datos.
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader("CalculadoraPostfix/src/datos.txt"));
+			//in = new BufferedReader(new FileReader("src/datos.txt"));
+			in = new BufferedReader(new FileReader("datos.txt"));
 		} catch (FileNotFoundException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -216,6 +210,8 @@ public class Main {
 
 		// Variable para guardar uno a uno los datos sacados del txt
 		String expresion;
+		
+		System.out.println(implementacion + " Enlazada");
 
 		// Corre mientras hay datos para leer
 		try {
@@ -232,7 +228,7 @@ public class Main {
 						// Retorna el resultado de la operacion y lo guarda
 						// @param1 = miStack.pop()
 						// @param2 = miStack.pop()
-						result = calculos.sumar(implementacion.getLast(), implementacion.getLast());
+						result = calculos.sumar(implementacion.remove(), implementacion.remove());
 
 						// Se agrega el resultado a la ultima posicion del stack
 						implementacion.add(result);
@@ -243,7 +239,7 @@ public class Main {
 						// Retorna el resultado de la operacion y lo guarda
 						// @param1 = miStack.pop()
 						// @param2 = miStack.pop()
-						result = calculos.restar(implementacion.getLast(), implementacion.getLast());
+						result = calculos.restar(implementacion.remove(), implementacion.remove());
 
 						// Se agrega el resultado a la ultima posicion del stack
 						implementacion.add(result);
@@ -254,7 +250,7 @@ public class Main {
 						// Retorna el resultado de la operacion y lo guarda
 						// @param1 = miStack.pop()
 						// @param2 = miStack.pop()
-						result = calculos.multiplicar(implementacion.getLast(), implementacion.getLast());
+						result = calculos.multiplicar(implementacion.remove(), implementacion.remove());
 
 						// Se agrega el resultado a la ultima posicion del stack
 						implementacion.add(result);
@@ -265,7 +261,7 @@ public class Main {
 						// Retorna el resultado de la operacion y lo guarda
 						// @param1 = miStack.pop()
 						// @param2 = miStack.pop()
-						result = calculos.dividir(implementacion.getLast(), implementacion.getLast());
+						result = calculos.dividir(implementacion.remove(), implementacion.remove());
 
 						// Se agrega el resultado a la ultima posicion del stack
 						implementacion.add(result);
@@ -289,7 +285,7 @@ public class Main {
 				// Al final de correr en cada elemento se despliega el resultado de las
 				// operaciones
 
-				System.out.println(String.format("%-20s", expresion) + " = " + implementacion.getLast());
+				System.out.println(String.format("%-20s", expresion) + " = " + implementacion.remove());
 			}
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
@@ -301,12 +297,14 @@ public class Main {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} // Cierra el BufferReader cuando finalizamos en buscar todos los datos
+		
+		
 
 	}
 
 	// Metodo para hacer los calculos
-	// y hace llamada al Factory class
-	public void calcular(String implementation) {
+	// y hace llamada al Factory del Stack
+	public void implementacionStack(String implementation) {
 
 		// Llama a la clase Factory y pasa parametro
 		// en base a la implementacion requerida
@@ -314,11 +312,14 @@ public class Main {
 
 		// Se guarda los resultdos de las operaciones
 		int result = 0;
+		
+		System.out.println(implementacion + " implementado");
 
 		// Busca y carga el archivo datos.txt donde se guardan los datos.
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader("CalculadoraPostfix/src/datos.txt"));
+			//in = new BufferedReader(new FileReader("src/datos.txt"));
+			in = new BufferedReader(new FileReader("datos.txt"));
 		} catch (FileNotFoundException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();

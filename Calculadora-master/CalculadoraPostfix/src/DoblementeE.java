@@ -51,9 +51,10 @@ public class DoblementeE<E> extends AbstractList<E>{
         tail = tail.getPrevious();
 		if(head == tail){
 			head = null;
-		}else {
-			tail.setNext(null);
 		}
+//		}else {
+//			tail.setNext(null);
+//		}
 		count--;
 		return temp.data;
 	}
